@@ -4,15 +4,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .image img{
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     border-radius: 100%;
     text-align: center;
     object-fit: cover;
     object-position: center;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.image img:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* CONTAINER */
@@ -20,27 +28,55 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #131516;
+    min-height: 100vh;
+    background-color: #0a192f;
     font-family: 'Lato', sans-serif;
     padding: 0 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle at center, rgba(18, 168, 156, 0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
 }
 
 /* CARD */
 .card-container{
     display: flex;
-    width: 650px;
+    width: 750px;
     height: auto;
-    background: linear-gradient(to right,#024945, #12a89c); /* #2FEBD4, #DEFFFD*/
-    border-radius: 12px;
-    box-shadow: 1px 7px 10px 2px rgba(0, 0, 0, .15);
+    background: linear-gradient(135deg, rgba(2, 73, 69, 0.95), rgba(18, 168, 156, 0.9));
+    border-radius: 20px;
+    box-shadow: 0 10px 30px -5px rgba(2, 73, 69, 0.5);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px -5px rgba(2, 73, 69, 0.6);
 }
 
 .descripcion{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
+    padding: 40px;
+    flex: 1;
 }
 
 .image, .descripcion{
@@ -49,54 +85,98 @@
     color: #FFFFFF;
 }
 
+.descripcion h1{
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, #a8fff9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
 .descripcion h2{
-    line-height: 2;
+    line-height: 1.4;
     font-weight: 500;
-    font-size: medium;
+    font-size: 1.2em;
+    color: #a8fff9;
+    margin-bottom: 20px;
 }
 
 .descripcion p{
     font-weight: 300;
-    font-size: 17px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
 }
 
-.descripcion h1{
-    font-weight: 400;
+.descripcion p em {
+    color: #a8fff9;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.descripcion p strong {
+    color: #fff;
+    font-weight: 600;
 }
 
 /* ICONS */
 .descripcion .icons{
     margin-top: 30px;
+    display: flex;
+    gap: 25px;
 }
+
 .descripcion .icons a{
-    display: inline-block;
-    margin: 0 30px 0 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
     color: #FFFFFF;
-    font-size: 30px;
-    transition: .3s;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
 }
-a:hover{
-    transform: translateY(-3px) scale(1.05);
+
+.descripcion .icons a:hover{
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    color: #a8fff9;
 }
 
 /* TOOLTIP */
 .tooltip-text {
     position: absolute;
-    top: -25px;
-    left: -115%;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
-    width: 100px;
+    min-width: 100px;
     color: white;
-    font-size: 12px;
-    background-color: #192733;
-    border-radius: 10px;
-    padding: 5px 10px 5px 10px;
+    font-size: 14px;
+    background-color: rgba(25, 39, 51, 0.9);
+    border-radius: 8px;
+    padding: 8px 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 #fade {
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: all 0.3s ease;
+    transform: translateY(10px);
 }
-.hover-text:hover #fade { opacity: 1; }
+
+.hover-text:hover #fade { 
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .hover-text {
     position: relative;
     display: inline-block;
@@ -107,51 +187,39 @@ a:hover{
 }
 
 /* RESPONSIVE */
-@media (max-width: 576px){
+@media (max-width: 768px){
     .container{
-        height: 100vh;
-        padding: 0 15px;
+        padding: 20px;
     }
     .card-container{
-        display: flex;
         flex-direction: column-reverse;
-        background: linear-gradient(#12a89c, #024945);
-        width: 750px;
-        margin-top: 12px;
-        margin-bottom: 12px;
+        width: 100%;
+        max-width: 500px;
+        background: linear-gradient(180deg, rgba(2, 73, 69, 0.95), rgba(18, 168, 156, 0.9));
     }
     .image img{
-        width: 90px;
-        height: 90px;
+        width: 150px;
+        height: 150px;
     }
     .image{
-        padding: 15px 0 0 0;
+        padding: 20px 0;
     }
     .descripcion{
-        padding: 10px 20px 18px 20px;
+        padding: 30px;
+        align-items: center;
+        text-align: center;
     }
     .descripcion h1{
-        font-weight: 400;
-        font-size: 25px;
+        font-size: 2em;
     }
     .descripcion h2{
-        line-height: 2;
-        font-weight: 500;
-        font-size: 17px;
+        font-size: 1.1em;
     }
     .descripcion p{
-        font-weight: 300;
-        font-size: 15px;
+        font-size: 1em;
+        text-align: center;
     }
     .descripcion .icons{
-        margin-top: 18px;
-    }
-}
-@media (min-width: 320px){
-    .icons{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
+        margin-top: 25px;
     }
 }
