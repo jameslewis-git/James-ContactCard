@@ -87,7 +87,7 @@
 
 .descripcion h1{
     font-size: 2.5em;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 10px;
     background: linear-gradient(to right, #fff, #a8fff9);
     -webkit-background-clip: text;
@@ -113,13 +113,13 @@
 
 .descripcion p em {
     color: #a8fff9;
-    font-style: normal;
-    font-weight: 500;
+    font-style: italic;
+    font-weight: 300;
 }
 
 .descripcion p strong {
-    color: #fff;
-    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
 }
 
 /* ICONS */
