@@ -4,8 +4,8 @@ const { title = 'James Lewis — Digital Contact', description } = Astro.props;
 
 import '../styles/global.css';
 
-const siteUrl   = 'https://jameslewis.netlify.app';
-const ogImage   = `${siteUrl}/images/og-card.jpg`;
+const siteUrl   = 'https://james-contactcard.netlify.app';
+const ogImage   = `${siteUrl}/images/og-card.png`;
 const canonical = siteUrl + '/';
 
 const structuredData = {
@@ -57,8 +57,9 @@ const structuredData = {
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:image" content={ogImage}>
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="924">
+    <meta property="og:image:height" content="632">
     <meta property="og:image:alt" content="James Lewis — Software Engineer, AI Architect & Cloud Builder">
     <meta property="og:site_name" content="James Lewis · Digital Contact Card">
     <meta property="og:locale" content="en_US">
@@ -72,6 +73,7 @@ const structuredData = {
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={ogImage}>
     <meta name="twitter:image:alt" content="James Lewis — Software Engineer, AI Architect & Cloud Builder">
+    <meta name="twitter:image:type" content="image/png">
     <meta name="twitter:creator" content="@jameslewis">
 
     <!-- ── Theme / PWA hints ── -->

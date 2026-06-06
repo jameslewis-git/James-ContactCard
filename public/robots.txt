@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jameslewis.netlify.app/sitemap.xml
+Sitemap: https://james-contactcard.netlify.app/sitemap.xml
