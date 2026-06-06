@@ -1,39 +1,231 @@
 ---
 //src/components/Card.astro
-const {name, position, aboutMe, linkedin, github, cvLink, profileImage } = Astro.props;
-
+const { name, position, aboutMe, linkedin, github, cvLink, profileImage } = Astro.props;
 import '../styles/card.css';
 ---
 
-<div class="container">
-    <div class="card-container">
-        <div class="descripcion">
-            <h1>{name}</h1>
-            <h2>{position}</h2>
-            <p set:html={aboutMe} />
-            <div class="icons">
-                <a href={linkedin} class="hover-text" target="_blank">
-                    <span class="tooltip-text" id="fade">
-                        LinkedIn
-                    </span>
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a href={github} class="hover-text" target="_blank">
-                    <span class="tooltip-text" id="fade">
-                        GitHub
-                    </span>
-                    <i class="bi bi-github"></i>
-                </a>
-                <a href={cvLink} class="hover-text" target="_blank">
-                    <span class="tooltip-text" id="fade">
-                        Resume
-                    </span>
-                    <i class="bi bi-file-earmark-arrow-down"></i>
-                </a>
-            </div>
-        </div>
-        <div class="image">
-            <img src={profileImage} alt={name}>
-        </div>
+<!-- Animated background grid -->
+<div class="scene">
+  <!-- Floating particles -->
+  <div class="particles">
+    {Array.from({length: 20}).map((_, i) => (
+      <span class="particle" style={`--i:${i};`}></span>
+    ))}
+  </div>
+
+  <!-- Corner decorators -->
+  <div class="corner-tl"></div>
+  <div class="corner-tr"></div>
+  <div class="corner-bl"></div>
+  <div class="corner-br"></div>
+
+  <!-- Scanlines overlay -->
+  <div class="scanlines"></div>
+
+  <!-- Grid background -->
+  <div class="grid-bg"></div>
+
+  <!-- Main Card -->
+  <div class="card-wrapper">
+    <!-- Top status bar -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="status-dot"></span>
+        <span class="mono">SYS.IDENTITY · CONTACT_CARD_v2</span>
+      </div>
+      <div class="status-right">
+        <span class="mono" id="live-time">--:--:--</span>
+        <span class="mono status-online">● ONLINE</span>
+      </div>
     </div>
+
+    <div class="card-body">
+      <!-- LEFT: Profile Image Column -->
+      <div class="profile-col">
+        <div class="avatar-ring-wrap">
+          <div class="avatar-ring ring-3"></div>
+          <div class="avatar-ring ring-2"></div>
+          <div class="avatar-ring ring-1"></div>
+          <div class="avatar-frame">
+            <img src={profileImage} alt={name} class="avatar-img" />
+            <div class="avatar-scan"></div>
+          </div>
+        </div>
+
+        <!-- Tech badges below avatar -->
+        <div class="tech-badges">
+          <span class="badge">AI</span>
+          <span class="badge">Cloud</span>
+          <span class="badge">Full-Stack</span>
+        </div>
+
+        <!-- Vertical divider line -->
+        <div class="v-divider">
+          <span class="divider-dot"></span>
+          <span class="divider-line"></span>
+          <span class="divider-dot"></span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Info Column -->
+      <div class="info-col">
+        <!-- Name section -->
+        <div class="name-block">
+          <div class="name-tag mono">$ whoami</div>
+          <h1 class="name">{name}</h1>
+          <div class="position-wrap">
+            <span class="position-bracket mono">[</span>
+            <span class="position">{position}</span>
+            <span class="position-bracket mono">]</span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-divider"></div>
+
+        <!-- Terminal bio block -->
+        <div class="bio-terminal">
+          <div class="terminal-header">
+            <span class="t-dot red"></span>
+            <span class="t-dot yellow"></span>
+            <span class="t-dot green"></span>
+            <span class="mono t-title">bio.sh</span>
+          </div>
+          <div class="terminal-body">
+            <span class="mono prompt">› </span>
+            <span class="bio-text" set:html={aboutMe} />
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-val">10+</span>
+            <span class="stat-label mono">PROJECTS</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat-item">
+            <span class="stat-val">15+</span>
+            <span class="stat-label mono">TECH_STACK</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat-item">
+            <span class="stat-val">3</span>
+            <span class="stat-label mono">DOMAINS</span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-divider"></div>
+
+        <!-- Action links -->
+        <div class="action-row">
+          <a href={linkedin} target="_blank" rel="noopener" class="action-btn primary" id="btn-linkedin">
+            <i class="bi bi-linkedin"></i>
+            <span>LinkedIn</span>
+            <span class="btn-glow"></span>
+          </a>
+          <a href={github} target="_blank" rel="noopener" class="action-btn secondary" id="btn-github">
+            <i class="bi bi-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href={cvLink} target="_blank" rel="noopener" class="action-btn secondary" id="btn-resume">
+            <i class="bi bi-file-earmark-code"></i>
+            <span>Résumé</span>
+          </a>
+          <a href="mailto:jameslewis.build@gmail.com" class="action-btn icon-only" id="btn-email" title="Email">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
+        </div>
+
+        <!-- Bottom terminal command line -->
+        <div class="cmd-line mono">
+          <span class="prompt-sym">$</span>
+          <span class="cmd-text" id="cmd-typing"></span>
+          <span class="cursor-blink">▌</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom data strip -->
+    <div class="data-strip">
+      <span class="mono">LOC: Mumbai, India (IST)</span>
+      <span class="strip-sep">·</span>
+      <span class="mono">STATUS: Open to Opportunities</span>
+      <span class="strip-sep">·</span>
+      <span class="mono">BUILD: <span class="cyan" id="build-id">INIT...</span></span>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Live Clock
+  function updateClock() {
+    const el = document.getElementById('live-time');
+    if (el) {
+      const now = new Date();
+      el.textContent = now.toLocaleTimeString('en-GB', { hour12: false, timeZone: 'Asia/Kolkata' });
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Build ID
+  const buildEl = document.getElementById('build-id');
+  if (buildEl) {
+    const hash = Math.random().toString(36).substring(2, 10).toUpperCase();
+    buildEl.textContent = `v2.0.${hash}`;
+  }
+
+  // Typing animation for cmd line
+  const cmds = [
+    'connect --target jameslewis',
+    'ssh jameslewis@cloud.build',
+    'git clone https://github.com/jameslewis-git',
+    'deploy --env production --stack ai',
+    'ping jameslewis.build@gmail.com',
+  ];
+  let cmdIdx = 0;
+  let charIdx = 0;
+  let deleting = false;
+  const cmdEl = document.getElementById('cmd-typing');
+
+  function typeCmd() {
+    if (!cmdEl) return;
+    const current = cmds[cmdIdx];
+    if (!deleting) {
+      cmdEl.textContent = current.substring(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        deleting = true;
+        setTimeout(typeCmd, 1800);
+        return;
+      }
+    } else {
+      cmdEl.textContent = current.substring(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        deleting = false;
+        cmdIdx = (cmdIdx + 1) % cmds.length;
+      }
+    }
+    setTimeout(typeCmd, deleting ? 30 : 60);
+  }
+  setTimeout(typeCmd, 1200);
+
+  // Mouse parallax on card
+  const scene = document.querySelector('.scene');
+  const cardWrapper = document.querySelector('.card-wrapper');
+
+  if (scene && cardWrapper) {
+    scene.addEventListener('mousemove', (e) => {
+      const rect = scene.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      cardWrapper.style.transform = `perspective(1200px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateZ(0)`;
+    });
+    scene.addEventListener('mouseleave', () => {
+      cardWrapper.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+    });
+  }
+</script>

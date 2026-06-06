@@ -1,25 +1,101 @@
 ---
 //src/layouts/BaseLayout.astro
-const { title = 'Personal Card Astro', description } = Astro.props;
+const { title = 'James Lewis — Digital Contact', description } = Astro.props;
 
 import '../styles/global.css';
----
-<!-- Here you can change everything related to the head, favicon, icons, and fonts. -->
 
+const siteUrl   = 'https://jameslewis.netlify.app';
+const ogImage   = `${siteUrl}/images/og-card.jpg`;
+const canonical = siteUrl + '/';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "James Lewis",
+  "url": siteUrl,
+  "image": ogImage,
+  "jobTitle": "Software Engineer, AI Architect & Cloud Builder",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelance / Open to Opportunities"
+  },
+  "description": "Full-stack TypeScript/React developer specialising in scalable AI-integrated workflows and serverless cloud infrastructure on GCP.",
+  "sameAs": [
+    "https://www.linkedin.com/in/-jameslewis/",
+    "https://github.com/jameslewis-git"
+  ],
+  "knowsAbout": [
+    "TypeScript", "React", "Next.js", "Astro",
+    "Google Cloud Platform", "Docker", "Kubernetes",
+    "LLM", "Gemini AI", "Artificial Intelligence",
+    "Full-Stack Development", "Serverless Architecture"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Mumbai",
+    "addressCountry": "IN"
+  }
+};
+---
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ── Primary SEO ── -->
+    <title>{title}</title>
     <meta name="description" content={description}>
-    <!-- FAVICON -->
-    <link rel="shortcut icon" href="..//favicon.ico" type="image/x-icon">
-    <!-- GOOGLE FONTS -->
+    <meta name="keywords" content="James Lewis, Software Engineer, AI Architect, Cloud Builder, Full Stack Developer, TypeScript, React, GCP, Kubernetes, Docker, LLM, Gemini AI, Mumbai">
+    <meta name="author" content="James Lewis">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href={canonical}>
+
+    <!-- ── Open Graph / Facebook ── -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content={canonical}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="James Lewis — Software Engineer, AI Architect & Cloud Builder">
+    <meta property="og:site_name" content="James Lewis · Digital Contact Card">
+    <meta property="og:locale" content="en_US">
+    <meta property="profile:first_name" content="James">
+    <meta property="profile:last_name" content="Lewis">
+
+    <!-- ── Twitter / X Card ── -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content={canonical}>
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
+    <meta name="twitter:image:alt" content="James Lewis — Software Engineer, AI Architect & Cloud Builder">
+    <meta name="twitter:creator" content="@jameslewis">
+
+    <!-- ── Theme / PWA hints ── -->
+    <meta name="theme-color" content="#00e5ff">
+    <meta name="color-scheme" content="dark">
+    <meta name="application-name" content="James Lewis Card">
+
+    <!-- ── Favicon ── -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- ── Sitemap ── -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+    <!-- ── Fonts (preconnect first, then stylesheet) ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-    <!-- CDN ICON BOOTSTRAP 5 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- ── Bootstrap Icons ── -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- ── JSON-LD Structured Data ── -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <main>
