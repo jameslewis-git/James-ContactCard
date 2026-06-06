@@ -1,6 +1,6 @@
 ---
 //src/components/Card.astro
-const { name, position, aboutMe, linkedin, github, cvLink, profileImage } = Astro.props;
+const { name, position, aboutMe, linkedin, github, cvLink, profileImage, portfolioLink } = Astro.props;
 import '../styles/card.css';
 ---
 
@@ -120,6 +120,13 @@ import '../styles/card.css';
 
         <!-- Action links -->
         <div class="action-row">
+          {portfolioLink && (
+            <a href={portfolioLink} target="_blank" rel="noopener" class="action-btn portfolio" id="btn-portfolio">
+              <i class="bi bi-box-arrow-up-right"></i>
+              <span>Portfolio</span>
+              <span class="btn-glow"></span>
+            </a>
+          )}
           <a href={linkedin} target="_blank" rel="noopener" class="action-btn primary" id="btn-linkedin">
             <i class="bi bi-linkedin"></i>
             <span>LinkedIn</span>
